@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +19,12 @@ namespace Agenda
             InitializeComponent();
         }
 
+        SqlConnection sqlCon = null;
+        private string strCon = "@Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Agenda.mdf;Integrated Security=True";
+
+        private string strSql = string.Empty;
+
+
         private void FrmMenu_Load(object sender, EventArgs e)
         {
             btnAtualizarAgenda.Enabled = false;
@@ -30,16 +38,14 @@ namespace Agenda
             txtRGAgenda.Enabled = false;
             mtxtCPFAgenda.Enabled = false;
             txtEmailAgenda.Enabled = false;
-            txtEnderçoAgenda.Enabled = false;
+            txtEnderecoAgenda.Enabled = false;
             txtNumeroAgenda.Enabled = false;
             txtBairroAgenda.Enabled = false;
             txtCidadeAgenda.Enabled = false;
             mtxtTelefone1.Enabled = false;
             mtxtTelefone2.Enabled = false;
-            txtTelefone3.Enabled = false;
-
-
-           
+            mtxtTelefone3.Enabled = false;
+ 
         }
 
         private void btnNovoAgenda_Click(object sender, EventArgs e)
@@ -56,29 +62,26 @@ namespace Agenda
             txtRGAgenda.Enabled = true;
             mtxtCPFAgenda.Enabled = true;
             txtEmailAgenda.Enabled = true;
-            txtEnderçoAgenda.Enabled = true;
+            txtEnderecoAgenda.Enabled = true;
             txtNumeroAgenda.Enabled = true;
             txtBairroAgenda.Enabled = true;
             txtCidadeAgenda.Enabled = true;
             mtxtTelefone1.Enabled = true;
             mtxtTelefone2.Enabled = true;
-            txtTelefone3.Enabled = true;
+            mtxtTelefone3.Enabled = true;
 
             txtNomeAgenda.Clear();
             txtRGAgenda.Clear();
             txtIDAgenda.Clear();
             mtxtCPFAgenda.Clear();
             txtEmailAgenda.Clear();
-            txtEnderçoAgenda.Clear();
+            txtEnderecoAgenda.Clear();
             txtNumeroAgenda.Clear();
             txtBairroAgenda.Clear();
             txtCidadeAgenda.Clear();
             mtxtTelefone1.Clear();
             mtxtTelefone2.Clear();
-            txtTelefone3.Clear();
-
-
-
+            mtxtTelefone3.Clear();
 
         }
 
@@ -86,5 +89,54 @@ namespace Agenda
         {
             Close();
         }
+
+        private void btnInserirAgenda_Click(object sender, EventArgs e)
+        {
+            //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Agenda.mdf;Integrated Security=True
+
+            strSql = "Insert into Agenda (Nome, RG, CPF, Endereco, Numero, Bairro, Cidade, Email, Telefone1, Telefone2," +
+                "Telefone3) values (@Nome, @RG, @CPF, @Endereco, @Numero, @BAirro,@Cidade, @Email, @Telefone1, @Telefone2," +
+                "@Telefone3)";
+
+            sqlCon = new SqlConnection(strCon);
+
+            SqlCommand comando = new SqlCommand(strSql, sqlCon);
+
+            comando.Parameters.Add("@Nome", SqlDbType.VarChar).Value = txtNomeAgenda.Text;
+            comando.Parameters.Add("@RG", SqlDbType.VarChar).Value = txtRGAgenda.Text;
+            comando.Parameters.Add("@CPF", SqlDbType.VarChar).Value = mtxtCPFAgenda.Text;
+            comando.Parameters.Add("@Endereço", SqlDbType.VarChar).Value = txtEnderecoAgenda.Text;
+            comando.Parameters.Add("@Numero", SqlDbType.Int).Value = int.Parse (txtNumeroAgenda.Text);
+            comando.Parameters.Add("@Bairro", SqlDbType.VarChar).Value = txtBairroAgenda.Text;
+            comando.Parameters.Add("@Cidade", SqlDbType.VarChar).Value = txtCidadeAgenda.Text;
+            comando.Parameters.Add("@Telefone1", SqlDbType.VarChar).Value = mtxtTelefone1.Text;
+            comando.Parameters.Add("@Telefone2", SqlDbType.VarChar).Value = mtxtTelefone2.Text;
+            comando.Parameters.Add("@Telefone3", SqlDbType.VarChar).Value = mtxtTelefone3.Text;
+            //comando.Parameters.Add("@DataCadastro", SqlDbType.VarChar).Value = txtNomeAgenda.Text;
+
+            try
+            {
+                sqlCon.Open();
+
+                comando.ExecuteNonQuery();
+
+                MessageBox.Show("Cadastro realizado com Sucesso");
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                sqlCon.Close();
+            }
+
+
+        }
+
+       
     }
 }
+ 

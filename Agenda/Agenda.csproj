@@ -61,6 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BDAgendaDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDAgendaDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FrmIniciar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +102,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="BDAgendaDataSet.xsc">
+      <DependentUpon>BDAgendaDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BDAgendaDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDAgendaDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDAgendaDataSet.xss">
+      <DependentUpon>BDAgendaDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

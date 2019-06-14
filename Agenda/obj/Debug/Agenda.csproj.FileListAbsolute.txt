@@ -9,4 +9,3 @@ C:\Users\Heliton\source\repos\Agenda\Agenda\obj\Debug\Agenda.csproj.GenerateReso
 C:\Users\Heliton\source\repos\Agenda\Agenda\obj\Debug\Agenda.csproj.CoreCompileInputs.cache
 C:\Users\Heliton\source\repos\Agenda\Agenda\obj\Debug\Agenda.exe
 C:\Users\Heliton\source\repos\Agenda\Agenda\obj\Debug\Agenda.pdb
-C:\Users\Heliton\source\repos\Agenda\Agenda\bin\Debug\Agenda_log.ldf

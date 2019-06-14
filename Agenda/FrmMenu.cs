@@ -14,15 +14,23 @@ namespace Agenda
 {
     public partial class FrmMenu : Form
     {
+
+
+      
+
+
         public FrmMenu()
         {
             InitializeComponent();
         }
 
+
         SqlConnection sqlCon = null;
-        private string strCon = "@Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Agenda.mdf;Integrated Security=True";
+
+        private string strCon = @"Data Source=HELITON\SQLEXPRESS;Initial Catalog=BDAgenda;Persist Security Info=True;User ID=sa;Password=1234";
 
         private string strSql = string.Empty;
+
 
 
         private void FrmMenu_Load(object sender, EventArgs e)
@@ -45,6 +53,8 @@ namespace Agenda
             mtxtTelefone1.Enabled = false;
             mtxtTelefone2.Enabled = false;
             mtxtTelefone3.Enabled = false;
+
+
  
         }
 
@@ -94,7 +104,10 @@ namespace Agenda
         {
             //Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Agenda.mdf;Integrated Security=True
 
-            strSql = "Insert into Agenda (Nome, RG, CPF, Endereco, Numero, Bairro, Cidade, Email, Telefone1, Telefone2," +
+
+
+
+        strSql = "Insert into TblAgenda (Nome, RG, CPF, Endereco, Numero, Bairro, Cidade, Email, Telefone1, Telefone2," +
                 "Telefone3) values (@Nome, @RG, @CPF, @Endereco, @Numero, @BAirro,@Cidade, @Email, @Telefone1, @Telefone2," +
                 "@Telefone3)";
 
@@ -105,10 +118,11 @@ namespace Agenda
             comando.Parameters.Add("@Nome", SqlDbType.VarChar).Value = txtNomeAgenda.Text;
             comando.Parameters.Add("@RG", SqlDbType.VarChar).Value = txtRGAgenda.Text;
             comando.Parameters.Add("@CPF", SqlDbType.VarChar).Value = mtxtCPFAgenda.Text;
-            comando.Parameters.Add("@Endereço", SqlDbType.VarChar).Value = txtEnderecoAgenda.Text;
+            comando.Parameters.Add("@Endereco", SqlDbType.VarChar).Value = txtEnderecoAgenda.Text;
             comando.Parameters.Add("@Numero", SqlDbType.Int).Value = int.Parse (txtNumeroAgenda.Text);
             comando.Parameters.Add("@Bairro", SqlDbType.VarChar).Value = txtBairroAgenda.Text;
             comando.Parameters.Add("@Cidade", SqlDbType.VarChar).Value = txtCidadeAgenda.Text;
+            comando.Parameters.Add("@Email", SqlDbType.VarChar).Value = txtEmailAgenda.Text;
             comando.Parameters.Add("@Telefone1", SqlDbType.VarChar).Value = mtxtTelefone1.Text;
             comando.Parameters.Add("@Telefone2", SqlDbType.VarChar).Value = mtxtTelefone2.Text;
             comando.Parameters.Add("@Telefone3", SqlDbType.VarChar).Value = mtxtTelefone3.Text;

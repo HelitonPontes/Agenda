@@ -24,5 +24,10 @@ namespace Agenda
             frm.Closed += (s, args) => this.Close();
             frm.Show();
         }
+
+        private void FrmIniciar_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
